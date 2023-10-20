@@ -1,6 +1,5 @@
 <resources>
     <string name="app_name">test</string>
-    <!-- TODO: Remove or change this placeholder text -->
     <string name="null_name">Нет имени</string>
     <!-- Фрагмент добавления -->
     <string name="add_record">Дабавить мероприятие</string>
@@ -9,10 +8,15 @@
     <string name="about_add_place">Место провидения:</string>
     <string name="about_add_date">Дата проведения:</string>
     <string name="about_add_time">Время проведения:</string>
-    <string name="date_hint">гггг-мм-дд</string>
-    <string name="time_hint">чч:мм</string>
-
-
+    <string name="date_hint">____г __м __д</string>
+    <string name="time_hint">__ч __м</string>
+    <!-- Ошибки ввода -->
+    <string name="null_str">Пустое поле</string>
+    <string name="alert_msg">Часть полей пустые\nЕсли так и задуманно то нажмите далее\nВы всегда можете поменять данные нажав на элемент списка</string>
+    <string name="pos_btn">Далее</string>
+    <string name="neg_btn">Отмена</string>
+    <string name="data_digits">0123456789г м д </string>
+    <string name="time_digits">0123456789ч м </string>
 
 
 

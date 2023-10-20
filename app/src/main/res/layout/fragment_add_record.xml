@@ -58,8 +58,8 @@
         android:layout_height="40sp"
         android:layout_marginTop="15dp"
         android:ems="10"
-        android:inputType="numberSigned"
-        android:digits="0123456789-"
+        android:inputType="number|textMultiLine"
+        android:digits="@string/data_digits"
         app:layout_constraintStart_toStartOf="@+id/editTextPlace"
         app:layout_constraintTop_toBottomOf="@+id/editTextPlace" />
 
@@ -70,8 +70,8 @@
         android:layout_height="40sp"
         android:layout_marginTop="15dp"
         android:ems="10"
-        android:inputType="numberSigned"
-        android:digits="0123456789:"
+        android:inputType="number|textMultiLine"
+        android:digits="@string/time_digits"
         app:layout_constraintStart_toStartOf="@+id/editTextDate"
         app:layout_constraintTop_toBottomOf="@+id/editTextDate" />
 

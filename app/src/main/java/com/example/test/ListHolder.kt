@@ -26,5 +26,5 @@ class ListHolder : ViewModel() {
     }
 
     //класс с данными
-    data class Event(val name: String?,val place: String?, val date: LocalDate?,val time: LocalTime?)
+    data class Event(val name: String,val place: String, val date: String,val time: String)
 }
