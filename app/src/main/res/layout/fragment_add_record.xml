@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".AddRecordFragment">
+
+    <TextView
+    android:id="@+id/aboutAddText"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:text="@string/about_add"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+    android:id="@+id/aboutAddTime"
+    android:layout_width="wrap_content"
+    android:layout_height="40sp"
+    android:layout_marginTop="15dp"
+    android:text="@string/about_add_time"
+    app:layout_constraintStart_toStartOf="@+id/aboutAddDate"
+    app:layout_constraintTop_toBottomOf="@+id/aboutAddDate" />
+
+    <TextView
+        android:id="@+id/aboutAddDate"
+        android:layout_width="wrap_content"
+        android:layout_height="40sp"
+        android:layout_marginTop="15dp"
+        android:text="@string/about_add_date"
+        app:layout_constraintStart_toStartOf="@+id/aboutAddPlace"
+        app:layout_constraintTop_toBottomOf="@+id/aboutAddPlace" />
+
+    <TextView
+        android:id="@+id/aboutAddName"
+        android:layout_width="wrap_content"
+        android:layout_height="40sp"
+        android:layout_marginTop="15dp"
+        android:text="@string/about_add_name"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/aboutAddText" />
+
+    <TextView
+        android:id="@+id/aboutAddPlace"
+        android:layout_width="wrap_content"
+        android:layout_height="40sp"
+        android:layout_marginTop="15dp"
+        android:text="@string/about_add_place"
+        app:layout_constraintStart_toStartOf="@+id/aboutAddName"
+        app:layout_constraintTop_toBottomOf="@+id/aboutAddName" />
+
+    <EditText
+        android:id="@+id/editTextDate"
+        android:hint="@string/date_hint"
+        android:layout_width="wrap_content"
+        android:layout_height="40sp"
+        android:layout_marginTop="15dp"
+        android:ems="10"
+        android:inputType="numberSigned"
+        android:digits="0123456789-"
+        app:layout_constraintStart_toStartOf="@+id/editTextPlace"
+        app:layout_constraintTop_toBottomOf="@+id/editTextPlace" />
+
+    <EditText
+        android:id="@+id/editTextTime"
+        android:hint="@string/time_hint"
+        android:layout_width="wrap_content"
+        android:layout_height="40sp"
+        android:layout_marginTop="15dp"
+        android:ems="10"
+        android:inputType="numberSigned"
+        android:digits="0123456789:"
+        app:layout_constraintStart_toStartOf="@+id/editTextDate"
+        app:layout_constraintTop_toBottomOf="@+id/editTextDate" />
+
+    <EditText
+        android:id="@+id/editTextName"
+        android:layout_width="wrap_content"
+        android:layout_height="40sp"
+        android:layout_marginStart="80dp"
+        android:layout_marginTop="5dp"
+        android:ems="10"
+        android:inputType="text"
+        app:layout_constraintStart_toEndOf="@+id/aboutAddName"
+        app:layout_constraintTop_toTopOf="@+id/aboutAddName" />
+
+    <EditText
+        android:id="@+id/editTextPlace"
+        android:layout_width="wrap_content"
+        android:layout_height="40sp"
+        android:layout_marginTop="15dp"
+        android:ems="10"
+        android:inputType="text"
+        app:layout_constraintStart_toStartOf="@+id/editTextName"
+        app:layout_constraintTop_toBottomOf="@+id/editTextName" />
+
+    <Button
+        android:id="@+id/addButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20sp"
+        android:text="Button"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/aboutAddTime" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

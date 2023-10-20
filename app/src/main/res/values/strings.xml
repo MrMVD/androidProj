@@ -1,0 +1,19 @@
+<resources>
+    <string name="app_name">test</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="null_name">Нет имени</string>
+    <!-- Фрагмент добавления -->
+    <string name="add_record">Дабавить мероприятие</string>
+    <string name="about_add">Новое мероприятие</string>
+    <string name="about_add_name">Названте:</string>
+    <string name="about_add_place">Место провидения:</string>
+    <string name="about_add_date">Дата проведения:</string>
+    <string name="about_add_time">Время проведения:</string>
+    <string name="date_hint">гггг-мм-дд</string>
+    <string name="time_hint">чч:мм</string>
+
+
+
+
+
+</resources>
