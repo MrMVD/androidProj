@@ -1,6 +1,5 @@
 <resources>
     <string name="app_name">test</string>
-    <string name="null_name">Нет имени</string>
     <!-- Фрагмент добавления -->
     <string name="add_record">Дабавить мероприятие</string>
     <string name="about_add">Новое мероприятие</string>
@@ -12,12 +11,20 @@
     <string name="time_hint">__ч __м</string>
     <!-- Ошибки ввода -->
     <string name="null_str">Пустое поле</string>
-    <string name="alert_msg">Часть полей пустые\nЕсли так и задуманно то нажмите далее\nВы всегда можете поменять данные нажав на элемент списка</string>
-    <string name="pos_btn">Далее</string>
-    <string name="neg_btn">Отмена</string>
+    <!-- Пердупрежение добавления частично пустых записей -->
+    <string name="alert_input_msg">Часть полей пустые\nЕсли так и задуманно то нажмите далее\nВы всегда можете поменять данные нажав на корандаш</string>
+    <string name="alert_input_pos_btn">Далее</string>
+    <string name="alert_input_neg_btn">Отмена</string>
+    <!-- для ввода даты и времени -->
     <string name="data_digits">0123456789г м д </string>
     <string name="time_digits">0123456789ч м </string>
-
-
+    <!-- Пердупрежение удаления -->
+    <string name="alert_del_msg">Вы точно хатите удалить мероприятие?</string>
+    <string name="alert_del_pos_btn">Да</string>
+    <string name="alert_del_neg_btn">Отмена</string>
+    <!-- оссальное -->
+    <string name="null_name">Нет имени</string>
+    <string name="exit_dital">Обратно к списку</string>
+    <string name="edit_rec_btn">Изменить мероприятие</string>
 
 </resources>

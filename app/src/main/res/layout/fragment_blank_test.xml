@@ -9,4 +9,6 @@
         app:layoutManager="LinearLayoutManager"
         tools:context=".BlankFragmentTest"
         android:scrollbars="horizontal"
-        />
+        android:layout_marginTop="15sp"
+        android:layout_marginLeft="15sp"
+        android:layout_marginRight="15sp"/>

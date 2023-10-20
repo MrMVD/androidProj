@@ -5,55 +5,111 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.activityViewModels
+import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.Observer
+import com.example.test.databinding.FragmentAddRecordBinding
+import com.example.test.databinding.FragmentEditRecordBinding
+import ru.tinkoff.decoro.MaskImpl
+import ru.tinkoff.decoro.parser.UnderscoreDigitSlotsParser
+import ru.tinkoff.decoro.watchers.FormatWatcher
+import ru.tinkoff.decoro.watchers.MaskFormatWatcher
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
-
-/**
- * A simple [Fragment] subclass.
- * Use the [EditRecordFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
-class EditRecordFragment : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
-        }
-    }
+class EditRecordFragment(val position: Int) : Fragment() {
+    private val listHolder: ListHolder by activityViewModels()//наши данные
+    //для работы viewbinding для фрагмента
+    private var _binding: FragmentEditRecordBinding? = null
+    private val binding get() = _binding!!
+    private var nullStr =false
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_edit_record, container, false)
+        _binding = FragmentEditRecordBinding.inflate(inflater, container, false)
+        val view = binding.root
+        val event= listHolder.items.value?.get(position) //редактируемая запись
+        binding.editTextName.setText(event?.name ?: "")
+        binding.editTextPlace.setText(event?.place ?: "")
+        binding.editTextDate.setText(event?.date ?: "")
+        binding.editTextTime.setText(event?.time ?: "")
+
+        //маска ввода даты
+        val slots = UnderscoreDigitSlotsParser().parseSlots(getString(R.string.date_hint))
+        val formatWatcher: FormatWatcher = MaskFormatWatcher(MaskImpl.createTerminated(slots))
+        formatWatcher.installOn(binding.editTextDate)
+        //маска ввода времени
+        val slotsTime = UnderscoreDigitSlotsParser().parseSlots(getString(R.string.time_hint))
+        val maskTime = MaskImpl.createTerminated(slotsTime)
+        val watcherTime: FormatWatcher = MaskFormatWatcher(maskTime)
+        watcherTime.installOn(binding.editTextTime)
+        //ввод данных
+        binding.addButton.setOnClickListener {
+            //считывание данных и проверка их наличия
+            val inputName =binding.editTextName.text.toString()
+            if (inputName.length == 0) {
+                binding.editTextName.setError(getString(R.string.null_str))
+                nullStr=true
+            } else {
+                binding.editTextName.setError(null)
+            }
+
+            val inputPlace =binding.editTextPlace.text.toString()
+            if (inputPlace.length == 0) {
+                binding.editTextPlace.setError(getString(R.string.null_str))
+                nullStr=true
+            } else {
+                binding.editTextPlace.setError(null)
+            }
+
+            val inputDate =binding.editTextDate.text.toString()
+            if (inputDate.length == 0) {
+                binding.editTextDate.setError(getString(R.string.null_str))
+                nullStr=true
+            } else {
+                binding.editTextDate.setError(null)
+            }
+
+            val inputTime =binding.editTextTime.text.toString()
+            if (inputTime.length == 0) {
+                binding.editTextTime.setError(getString(R.string.null_str))
+                nullStr=true
+            } else {
+                binding.editTextTime.setError(null)
+            }
+
+            //для резульата диалога
+            val msg: MutableLiveData<Boolean> = MutableLiveData(false)
+            msg.observe(viewLifecycleOwner,
+                Observer { items -> if(msg.value==true){chengRec(inputName,inputPlace,inputDate,inputTime)} })
+
+            if(nullStr==true){
+                AlertInput(msg).show(childFragmentManager,"alertNullAdd")//вызываем диалоговое окно подтверждения
+            }else {chengRec(inputName,inputPlace,inputDate,inputTime)}
+
+        }
+        return view
     }
 
-    companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment EditRecordFragment.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            EditRecordFragment().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
-                }
-            }
+    fun backFrag(){
+        val fragList =
+            parentFragmentManager.findFragmentByTag("listFrag")
+        fragList?.let { it1 ->
+            parentFragmentManager.beginTransaction()
+                .show(it1)
+                .remove(this)
+                .commit()
+        }
+    }
+
+    fun chengRec(inputName:String,inputPlace:String,inputDate:String,inputTime:String)
+    {
+        val inputEvent =ListHolder.Event(inputName,inputPlace,inputDate,inputTime)
+        listHolder.changeRecord(inputEvent,position)
+        backFrag()}
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 }

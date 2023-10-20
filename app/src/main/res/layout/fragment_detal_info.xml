@@ -4,19 +4,11 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".EditRecordFragment"
+    tools:context=".DetalInfoFragment"
     android:layout_marginTop="15sp"
     android:layout_marginLeft="15sp"
     android:layout_marginRight="15sp">
 
-    <TextView
-        android:id="@+id/aboutAddText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/about_add"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/aboutAddTime"
@@ -40,10 +32,10 @@
         android:id="@+id/aboutAddName"
         android:layout_width="wrap_content"
         android:layout_height="48sp"
-        android:layout_marginTop="12dp"
+        android:layout_marginTop="20dp"
         android:text="@string/about_add_name"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/aboutAddText" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/aboutAddPlace"
@@ -54,7 +46,7 @@
         app:layout_constraintStart_toStartOf="@+id/aboutAddName"
         app:layout_constraintTop_toBottomOf="@+id/aboutAddName" />
 
-    <EditText
+    <TextView
         android:id="@+id/editTextDate"
         android:layout_width="wrap_content"
         android:layout_height="48sp"
@@ -66,7 +58,7 @@
         app:layout_constraintStart_toStartOf="@+id/editTextPlace"
         app:layout_constraintTop_toBottomOf="@+id/editTextPlace" />
 
-    <EditText
+    <TextView
         android:id="@+id/editTextTime"
         android:layout_width="wrap_content"
         android:layout_height="48sp"
@@ -78,17 +70,18 @@
         app:layout_constraintStart_toStartOf="@+id/editTextDate"
         app:layout_constraintTop_toBottomOf="@+id/editTextDate" />
 
-    <EditText
+    <TextView
         android:id="@+id/editTextName"
         android:layout_width="wrap_content"
         android:layout_height="48sp"
         android:layout_marginStart="70dp"
+        android:layout_marginTop="20dp"
         android:ems="10"
         android:inputType="text"
         app:layout_constraintStart_toEndOf="@+id/aboutAddName"
-        app:layout_constraintTop_toBottomOf="@+id/aboutAddText" />
+        app:layout_constraintTop_toTopOf="parent" />
 
-    <EditText
+    <TextView
         android:id="@+id/editTextPlace"
         android:layout_width="wrap_content"
         android:layout_height="48sp"
@@ -99,13 +92,12 @@
         app:layout_constraintTop_toBottomOf="@+id/editTextName" />
 
     <Button
-        android:id="@+id/addButton"
+        android:id="@+id/button"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="15dp"
-        android:text="@string/edit_rec_btn"
-        app:layout_constraintTop_toBottomOf="@+id/aboutAddTime"
-        tools:layout_editor_absoluteX="1dp" />
-
-
+        android:text="@string/exit_dital"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/aboutAddTime" />
 </androidx.constraintlayout.widget.ConstraintLayout>

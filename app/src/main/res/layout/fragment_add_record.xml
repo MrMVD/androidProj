@@ -4,7 +4,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".AddRecordFragment">
+    tools:context=".AddRecordFragment"
+    android:layout_marginTop="15sp"
+    android:layout_marginLeft="15sp"
+    android:layout_marginRight="15sp">
 
     <TextView
     android:id="@+id/aboutAddText"
@@ -16,18 +19,18 @@
     app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-    android:id="@+id/aboutAddTime"
-    android:layout_width="wrap_content"
-    android:layout_height="40sp"
-    android:layout_marginTop="15dp"
-    android:text="@string/about_add_time"
-    app:layout_constraintStart_toStartOf="@+id/aboutAddDate"
-    app:layout_constraintTop_toBottomOf="@+id/aboutAddDate" />
+        android:id="@+id/aboutAddTime"
+        android:layout_width="wrap_content"
+        android:layout_height="48sp"
+        android:layout_marginTop="15dp"
+        android:text="@string/about_add_time"
+        app:layout_constraintStart_toStartOf="@+id/aboutAddDate"
+        app:layout_constraintTop_toBottomOf="@+id/aboutAddDate" />
 
     <TextView
         android:id="@+id/aboutAddDate"
         android:layout_width="wrap_content"
-        android:layout_height="40sp"
+        android:layout_height="48sp"
         android:layout_marginTop="15dp"
         android:text="@string/about_add_date"
         app:layout_constraintStart_toStartOf="@+id/aboutAddPlace"
@@ -36,8 +39,8 @@
     <TextView
         android:id="@+id/aboutAddName"
         android:layout_width="wrap_content"
-        android:layout_height="40sp"
-        android:layout_marginTop="15dp"
+        android:layout_height="48sp"
+        android:layout_marginTop="12dp"
         android:text="@string/about_add_name"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/aboutAddText" />
@@ -45,7 +48,7 @@
     <TextView
         android:id="@+id/aboutAddPlace"
         android:layout_width="wrap_content"
-        android:layout_height="40sp"
+        android:layout_height="48sp"
         android:layout_marginTop="15dp"
         android:text="@string/about_add_place"
         app:layout_constraintStart_toStartOf="@+id/aboutAddName"
@@ -53,43 +56,42 @@
 
     <EditText
         android:id="@+id/editTextDate"
-        android:hint="@string/date_hint"
         android:layout_width="wrap_content"
-        android:layout_height="40sp"
+        android:layout_height="48sp"
         android:layout_marginTop="15dp"
-        android:ems="10"
-        android:inputType="number|textMultiLine"
         android:digits="@string/data_digits"
+        android:ems="10"
+        android:hint="@string/date_hint"
+        android:inputType="number"
         app:layout_constraintStart_toStartOf="@+id/editTextPlace"
         app:layout_constraintTop_toBottomOf="@+id/editTextPlace" />
 
     <EditText
         android:id="@+id/editTextTime"
-        android:hint="@string/time_hint"
         android:layout_width="wrap_content"
-        android:layout_height="40sp"
+        android:layout_height="48sp"
         android:layout_marginTop="15dp"
-        android:ems="10"
-        android:inputType="number|textMultiLine"
         android:digits="@string/time_digits"
+        android:ems="10"
+        android:hint="@string/time_hint"
+        android:inputType="number"
         app:layout_constraintStart_toStartOf="@+id/editTextDate"
         app:layout_constraintTop_toBottomOf="@+id/editTextDate" />
 
     <EditText
         android:id="@+id/editTextName"
         android:layout_width="wrap_content"
-        android:layout_height="40sp"
-        android:layout_marginStart="80dp"
-        android:layout_marginTop="5dp"
+        android:layout_height="48sp"
+        android:layout_marginStart="70dp"
         android:ems="10"
         android:inputType="text"
         app:layout_constraintStart_toEndOf="@+id/aboutAddName"
-        app:layout_constraintTop_toTopOf="@+id/aboutAddName" />
+        app:layout_constraintTop_toBottomOf="@+id/aboutAddText" />
 
     <EditText
         android:id="@+id/editTextPlace"
         android:layout_width="wrap_content"
-        android:layout_height="40sp"
+        android:layout_height="48sp"
         android:layout_marginTop="15dp"
         android:ems="10"
         android:inputType="text"
@@ -100,9 +102,10 @@
         android:id="@+id/addButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20sp"
-        android:text="Button"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/aboutAddTime" />
+        android:layout_marginTop="15dp"
+        android:text="@string/add_record"
+        app:layout_constraintTop_toBottomOf="@+id/aboutAddTime"
+        tools:layout_editor_absoluteX="1dp" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

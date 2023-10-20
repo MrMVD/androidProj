@@ -17,6 +17,13 @@ class ListHolder : ViewModel() {
         items.value = updatedItems
     }
 
+    fun changeRecord(value:Event,position: Int){
+        val currentItems = items.value ?: emptyList()
+        val updatedItems = currentItems.toMutableList()
+        updatedItems[position]=value
+        items.value = updatedItems
+    }
+
     //удаление записи
     fun delRecord(position: Int) {
         val currentItems = items.value ?: emptyList()

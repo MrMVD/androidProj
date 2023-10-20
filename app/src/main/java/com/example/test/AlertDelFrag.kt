@@ -12,25 +12,24 @@ import androidx.fragment.app.setFragmentResult
 import androidx.lifecycle.MutableLiveData
 
 
-class AlertInput(val msg: MutableLiveData<Boolean>) : DialogFragment() {
+class AlertDelFrag(val msg: MutableLiveData<Boolean>) : DialogFragment() {
 
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
         return activity?.let {
             val builder = AlertDialog.Builder(it)
             builder.setTitle("Предупреждение")
-                .setMessage(getString(R.string.alert_input_msg))
-                .setPositiveButton(R.string.alert_input_pos_btn) {dialog, id ->
+                .setMessage(getString(R.string.alert_del_msg))
+                .setPositiveButton(R.string.alert_del_pos_btn) {dialog, id ->
                     msg.value=true
                     dialog.cancel()
                 }
-                .setNegativeButton(getString(R.string.alert_input_neg_btn))
+                .setNegativeButton(getString(R.string.alert_del_neg_btn))
                 {dialog, id ->
                     dialog.cancel()
-
                 }
             builder.create()
         } ?: throw IllegalStateException("Activity cannot be null")
     }
 
-    }
+}

@@ -1,8 +1,14 @@
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.fragment.app.FragmentManager
+import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.RecyclerView
 import com.example.test.AddRecordFragment
+import com.example.test.AlertDelFrag
+import com.example.test.AlertInput
+import com.example.test.BlankFragmentTest
+import com.example.test.DetalInfoFragment
 import com.example.test.EditRecordFragment
 import com.example.test.ListHolder
 import com.example.test.R
@@ -65,20 +71,46 @@ class MyAdapter(
     //клас для показа записей
     inner class RecordViewHolder(private val binding: ViewHolderBinding) :
         RecyclerView.ViewHolder(binding.root) {
-
         fun bind(position: Int) {
             val item = list.items.value?.get(position)
-            binding.textView.text = item?.name ?: (R.string.null_name).toString()
-            //запуск редактирование
+            binding.textView.text = item?.name
+            //запуск просмотра
             binding.root.setOnClickListener {
-                val fragEdit = EditRecordFragment()
-                myFragmentManager.beginTransaction()
-                    .replace(R.id.fragHolder, fragEdit)
-                    .commit()
+                val fragList = myFragmentManager.findFragmentByTag("listFrag")
+                val fragInfo = DetalInfoFragment(position)
+                fragList?.let { it1 ->
+                    myFragmentManager.beginTransaction()
+                        .hide(it1)
+                        .add(R.id.fragHolder, fragInfo)
+                        .commit()
+                }
+
+            }
+            //запуск редактирования
+            binding.editButton.setOnClickListener {
+                val fragList = myFragmentManager.findFragmentByTag("listFrag")
+                val fragAdd = EditRecordFragment(position)
+                fragList?.let { it1 ->
+                    myFragmentManager.beginTransaction()
+                        .hide(it1)
+                        .add(R.id.fragHolder, fragAdd)
+                        .commit()
+                }
             }
             //запуск удаления элемента
-            binding.imageButton.setOnClickListener {
-                list.delRecord(position)
+            binding.delButton.setOnClickListener {
+                val msg: MutableLiveData<Boolean> = MutableLiveData(false)
+                AlertDelFrag(msg).show(myFragmentManager,"alertDel")
+                myFragmentManager.findFragmentByTag("listFrag")?.let { it1 ->
+                    msg.observe(
+                        it1,
+                        Observer { items ->
+                            if (msg.value == true) {
+                                list.delRecord(position)
+                                notifyDataSetChanged()
+                            }
+                        })
+                }
             }
         }
     }

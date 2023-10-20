@@ -31,8 +31,8 @@ class BlankFragmentTest : Fragment() {
                 layoutManager = LinearLayoutManager(context)
                 adapter = MyAdapter(listHolder, parentFragmentManager)
                 //обновление списка при изменении данных
-                listHolder.items.observe(viewLifecycleOwner,
-                    Observer { items -> (adapter as MyAdapter).notifyDataSetChanged() })
+//                listHolder.items.observe(viewLifecycleOwner,
+//                    Observer { items -> (adapter as MyAdapter).notifyDataSetChanged() })
             }
         }
         return view

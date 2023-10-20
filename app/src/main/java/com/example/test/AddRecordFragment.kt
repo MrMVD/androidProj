@@ -3,11 +3,16 @@ package com.example.test
 import android.app.AlertDialog
 import android.os.Bundle
 import android.view.LayoutInflater
+import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.core.view.MenuHost
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.Observer
 import com.example.test.databinding.FragmentAddRecordBinding
 import ru.tinkoff.decoro.MaskImpl
 import ru.tinkoff.decoro.parser.UnderscoreDigitSlotsParser
@@ -77,21 +82,33 @@ class AddRecordFragment() : Fragment() {
                 binding.editTextTime.setError(null)
             }
 
+            //для резульата диалога
+            val msg:MutableLiveData<Boolean> = MutableLiveData(false)
+            msg.observe(viewLifecycleOwner,
+                Observer { items -> if(msg.value==true){addRec(inputName,inputPlace,inputDate,inputTime)} })
 
-            fun addRec(){listHolder.addRecord(ListHolder.Event(inputName,inputPlace,inputDate,inputTime))
-                val fragList =
-                    parentFragmentManager.findFragmentByTag("listFrag")
-                fragList?.let { it1 ->
-                    parentFragmentManager.beginTransaction()
-                        .show(it1)
-                        .remove(this)
-                        .commit()
-                }}
+            if(nullStr==true){
+                AlertInput(msg).show(childFragmentManager,"alertNullAdd")//вызываем диалоговое окно подтверждения
+            }else {addRec(inputName,inputPlace,inputDate,inputTime)}
 
         }
-
         return view
     }
+
+    fun backFrag(){
+        val fragList =
+            parentFragmentManager.findFragmentByTag("listFrag")
+        fragList?.let { it1 ->
+            parentFragmentManager.beginTransaction()
+                .show(it1)
+                .remove(this)
+                .commit()
+        }
+    }
+
+    fun addRec(inputName:String,inputPlace:String,inputDate:String,inputTime:String)
+    {listHolder.addRecord(ListHolder.Event(inputName,inputPlace,inputDate,inputTime))
+     backFrag()}
 
     override fun onDestroyView() {
         super.onDestroyView()
