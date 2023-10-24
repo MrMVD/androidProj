@@ -12,7 +12,7 @@
     <!-- Ошибки ввода -->
     <string name="null_str">Пустое поле</string>
     <!-- Пердупрежение добавления частично пустых записей -->
-    <string name="alert_input_msg">Часть полей пустые\nЕсли так и задуманно то нажмите далее\nВы всегда можете поменять данные нажав на корандаш</string>
+    <string name="alert_input_msg">Часть полей пустые\n\nЕсли так и задуманно то нажмите далее\n\nВы всегда можете поменять данные нажав на корандаш</string>
     <string name="alert_input_pos_btn">Далее</string>
     <string name="alert_input_neg_btn">Отмена</string>
     <!-- для ввода даты и времени -->
@@ -26,5 +26,6 @@
     <string name="null_name">Нет имени</string>
     <string name="exit_dital">Обратно к списку</string>
     <string name="edit_rec_btn">Изменить мероприятие</string>
+    <string name="about_edit_rec">Изменение мероприятия</string>
 
 </resources>
