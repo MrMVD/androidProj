@@ -53,7 +53,6 @@
         android:layout_marginTop="15dp"
         android:digits="@string/data_digits"
         android:ems="10"
-        android:hint="@string/date_hint"
         android:inputType="number"
         app:layout_constraintStart_toStartOf="@+id/editTextPlace"
         app:layout_constraintTop_toBottomOf="@+id/editTextPlace" />
@@ -65,7 +64,6 @@
         android:layout_marginTop="15dp"
         android:digits="@string/time_digits"
         android:ems="10"
-        android:hint="@string/time_hint"
         android:inputType="number"
         app:layout_constraintStart_toStartOf="@+id/editTextDate"
         app:layout_constraintTop_toBottomOf="@+id/editTextDate" />
