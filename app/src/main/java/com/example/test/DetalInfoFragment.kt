@@ -6,9 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.activityViewModels
-import com.example.test.databinding.FragmentAddRecordBinding
 import com.example.test.databinding.FragmentDetalInfoBinding
-import com.example.test.databinding.FragmentEditRecordBinding
 
 class DetalInfoFragment(val position: Int) : Fragment() {
     private val listHolder: ListHolder by activityViewModels()//наши данные

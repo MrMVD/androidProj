@@ -2,8 +2,6 @@ package com.example.test
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import java.time.LocalDate
-import java.time.LocalTime
 
 //класс для листа
 class ListHolder : ViewModel() {
