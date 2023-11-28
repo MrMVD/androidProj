@@ -6,32 +6,34 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.Observer
 import com.example.test.databinding.FragmentAddRecordBinding
 import ru.tinkoff.decoro.MaskImpl
 import ru.tinkoff.decoro.parser.UnderscoreDigitSlotsParser
 import ru.tinkoff.decoro.watchers.FormatWatcher
 import ru.tinkoff.decoro.watchers.MaskFormatWatcher
 
+class AddRecordFragment : Fragment(), AddRecordContract.View {
 
-class AddRecordFragment() : Fragment() {
-    private val listHolder: ListHolder by activityViewModels()//наши данные
-
-    //для работы viewbinding для фрагмента
+    private val listHolder: ListHolder by activityViewModels()
     private var _binding: FragmentAddRecordBinding? = null
     private val binding get() = _binding!!
-    private var nullStr =false
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-    }
+    private var presenter: AddRecordContract.Presenter? = null
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         _binding = FragmentAddRecordBinding.inflate(inflater, container, false)
+        return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        presenter = AddRecordPresenter(this)
+        setupUI()
+    }
+
+    private fun setupUI() {
         val view = binding.root
         //маска ввода даты
         val slots = UnderscoreDigitSlotsParser().parseSlots(getString(R.string.date_hint))
@@ -42,55 +44,49 @@ class AddRecordFragment() : Fragment() {
         val maskTime = MaskImpl.createTerminated(slotsTime)
         val watcherTime: FormatWatcher = MaskFormatWatcher(maskTime)
         watcherTime.installOn(binding.editTextTime)
-        //ввод данных
+
         binding.addButton.setOnClickListener {
-           //считывание данных и проверка их наличия
-            val inputName =binding.editTextName.text.toString()
-            if (inputName.length == 0) {
-                binding.editTextName.setError(getString(R.string.null_str))
-                nullStr=true
-            } else {
-                binding.editTextName.setError(null)
-            }
+            //считывание данных и проверка их наличия
+            val inputName = binding.editTextName.text.toString()
+            val inputPlace = binding.editTextPlace.text.toString()
+            val inputDate = binding.editTextDate.text.toString()
+            val inputTime = binding.editTextTime.text.toString()
 
-            val inputPlace =binding.editTextPlace.text.toString()
-            if (inputPlace.length == 0) {
-                binding.editTextPlace.setError(getString(R.string.null_str))
-                nullStr=true
-            } else {
-                binding.editTextPlace.setError(null)
-            }
-
-            val inputDate =binding.editTextDate.text.toString()
-            if (inputDate.length == 0) {
-                binding.editTextDate.setError(getString(R.string.null_str))
-                nullStr=true
-            } else {
-                binding.editTextDate.setError(null)
-            }
-
-            val inputTime =binding.editTextTime.text.toString()
-            if (inputTime.length == 0) {
-                binding.editTextTime.setError(getString(R.string.null_str))
-                nullStr=true
-            } else {
-                binding.editTextTime.setError(null)
-            }
-
-            //для резульата диалога
-            val msg:MutableLiveData<Boolean> = MutableLiveData(false)
-            msg.observe(viewLifecycleOwner,
-                Observer { items -> if(msg.value==true){addRec(inputName,inputPlace,inputDate,inputTime)} })
-
-            if(nullStr==true){
-                AlertInput(msg).show(childFragmentManager,"alertNullAdd")//вызываем диалоговое окно подтверждения
-            }else {addRec(inputName,inputPlace,inputDate,inputTime)}
-
+            presenter?.onAddButtonClick(
+                inputName,
+                inputPlace,
+                inputDate,
+                inputTime,
+                childFragmentManager
+            )
         }
-        return view
     }
 
-    fun backFrag(){
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
+        presenter?.onDestroy()
+        presenter = null
+    }
+
+    // Реализация методов AddRecordContract.View
+    override fun showNameError() {
+        binding.editTextName.error = getString(R.string.null_str)
+    }
+
+    override fun showPlaceError() {
+        binding.editTextPlace.error = getString(R.string.null_str)
+    }
+
+    override fun showDateError() {
+        binding.editTextDate.error = getString(R.string.null_str)
+    }
+
+    override fun showTimeError() {
+        binding.editTextTime.error = getString(R.string.null_str)
+    }
+
+    override fun onRecordAdded() {
         val fragList =
             parentFragmentManager.findFragmentByTag("listFrag")
         fragList?.let { it1 ->
@@ -101,12 +97,16 @@ class AddRecordFragment() : Fragment() {
         }
     }
 
-    fun addRec(inputName:String,inputPlace:String,inputDate:String,inputTime:String)
-    {listHolder.addRecord(ListHolder.Event(inputName,inputPlace,inputDate,inputTime))
-     backFrag()}
-
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
+    override fun addRec(
+        inputName: String,
+        inputPlace: String,
+        inputDate: String,
+        inputTime: String
+    ) {
+        listHolder.addRecord(ListHolder.Event(inputName, inputPlace, inputDate, inputTime))
     }
+
 }
+
+
+

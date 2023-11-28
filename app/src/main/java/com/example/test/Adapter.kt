@@ -6,8 +6,6 @@ import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.RecyclerView
 import com.example.test.AddRecordFragment
 import com.example.test.AlertDelFrag
-import com.example.test.AlertInput
-import com.example.test.BlankFragmentTest
 import com.example.test.DetalInfoFragment
 import com.example.test.EditRecordFragment
 import com.example.test.ListHolder
@@ -68,10 +66,13 @@ class MyAdapter(
             TYPE_BUTTON
         }
     }
+
     //клас для показа записей
     inner class RecordViewHolder(private val binding: ViewHolderBinding) :
         RecyclerView.ViewHolder(binding.root) {
         fun bind(position: Int) {
+
+
             val item = list.items.value?.get(position)
             binding.textView.text = item?.name
             //запуск просмотра
